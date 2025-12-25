@@ -16,6 +16,9 @@ class BlogAPIView(APIView):
         return Response(list(lst))
 
     def post(self, request):
+        serial = BlogSerializer(data=request.data)
+        serial.is_valid(raise_exception=True)
+
         post_new = Blog.objects.create(
             title = request.data['title'],
             content = request.data['content'],
